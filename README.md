@@ -1,2 +1,3 @@
 # ProjectStartUp
-Starting a project with Stanislav
+
+Starting a project with Stanislav Ispaneca
