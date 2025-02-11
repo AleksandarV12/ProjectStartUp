@@ -1,44 +1,71 @@
-<div class="container">
-    <!-- Title at the top -->
-    <h1>Welcome to Our Site</h1>
-  
-    <!-- Flexbox container to hold both info and form containers side by side -->
-    <div class="content">
-      <!-- Left container with site information -->
-      <div class="info-window">
-        <p>Welcome to our site. Please log in or register to continue.</p>
-        <p>Here we provide some information about the site, including features and benefits.</p>
-      </div>
-  
-      <!-- Right container for Login/Register forms -->
-      <div class="form-window">
-        <div class="buttons">
-          <button (click)="showLoginForm()">Login</button>
-          <button (click)="showRegisterForm()">Register</button>
+<!-- Title above the containers -->
+<h1 class="page-title">Welcome to My App</h1>
+
+<div class="landing-container">
+  <div class="info-section">
+    <h2>About Us</h2>
+    <p>Here is some information about the app...</p>
+  </div>
+
+  <div class="auth-section">
+    <!-- Buttons for Login/Register -->
+    <div class="auth-buttons">
+      <button (click)="showLogin = true; showRegister = false">Login</button>
+      <button (click)="showLogin = false; showRegister = true">Register</button>
+    </div>
+
+    <!-- Login Form (visible when showLogin is true) -->
+    <div *ngIf="showLogin" class="auth-form">
+      <h2>Login</h2>
+      <form (ngSubmit)="onLoginSubmit()">
+        <label for="loginEmail">Email:</label>
+        <input type="email" id="loginEmail" [(ngModel)]="loginEmail" name="loginEmail" required />
+        <div *ngIf="loginSubmitted && !loginEmail" class="error">
+          Email is required.
         </div>
-  
-        <!-- Login Form -->
-        <div *ngIf="showLogin">
-          <h2>Login</h2>
-          <form (ngSubmit)="onLoginSubmit()">
-            <input type="email" [(ngModel)]="loginEmail" name="loginEmail" required placeholder="Email">
-            <input type="password" [(ngModel)]="loginPassword" name="loginPassword" required placeholder="Password">
-            <button type="submit" [disabled]="!loginEmail || !loginPassword">Login</button>
-          </form>
+
+        <label for="loginPassword">Password:</label>
+        <input type="password" id="loginPassword" [(ngModel)]="loginPassword" name="loginPassword" required />
+        <div *ngIf="loginSubmitted && !loginPassword" class="error">
+          Password is required.
         </div>
-  
-        <!-- Register Form -->
-        <div *ngIf="showRegister">
-          <h2>Register</h2>
-          <form (ngSubmit)="onRegisterSubmit()">
-            <input type="text" [(ngModel)]="registerUsername" name="registerUsername" required placeholder="Username">
-            <input type="email" [(ngModel)]="registerEmail" name="registerEmail" required placeholder="Email">
-            <input type="password" [(ngModel)]="registerPassword" name="registerPassword" required placeholder="Password">
-            <input type="password" [(ngModel)]="registerConfirmPassword" name="registerConfirmPassword" required placeholder="Confirm Password">
-            <button type="submit" [disabled]="!registerUsername || !registerEmail || !registerPassword || !registerConfirmPassword || registerPassword !== registerConfirmPassword">Register</button>
-          </form>
+
+        <button type="submit" [disabled]="!loginEmail || !loginPassword">Login</button>
+      </form>
+    </div>
+
+    <!-- Register Form (visible when showRegister is true) -->
+    <div *ngIf="showRegister" class="auth-form">
+      <h2>Register</h2>
+      <form (ngSubmit)="onRegisterSubmit()">
+        <label for="registerUsername">Username:</label>
+        <input type="text" id="registerUsername" [(ngModel)]="registerUsername" name="registerUsername" required />
+        <div *ngIf="registerSubmitted && !registerUsername" class="error">
+          Username is required.
         </div>
-      </div>
+
+        <label for="registerEmail">Email:</label>
+        <input type="email" id="registerEmail" [(ngModel)]="registerEmail" name="registerEmail" required />
+        <div *ngIf="registerSubmitted && !registerEmail" class="error">
+          Email is required.
+        </div>
+
+        <label for="registerPassword">Password:</label>
+        <input type="password" id="registerPassword" [(ngModel)]="registerPassword" name="registerPassword" required />
+        <div *ngIf="registerSubmitted && !registerPassword" class="error">
+          Password is required.
+        </div>
+
+        <label for="registerConfirmPassword">Confirm Password:</label>
+        <input type="password" id="registerConfirmPassword" [(ngModel)]="registerConfirmPassword" name="registerConfirmPassword" required />
+        <div *ngIf="registerSubmitted && registerPassword !== registerConfirmPassword" class="error">
+          Passwords must match.
+        </div>
+
+        <button type="submit" [disabled]="!registerUsername || !registerEmail || !registerPassword || !registerConfirmPassword || registerPassword !== registerConfirmPassword">
+          Register
+        </button>
+      </form>
     </div>
   </div>
-  
+</div>
