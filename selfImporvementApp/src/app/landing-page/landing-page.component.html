@@ -1,0 +1,44 @@
+<div class="container">
+    <!-- Title at the top -->
+    <h1>Welcome to Our Site</h1>
+  
+    <!-- Flexbox container to hold both info and form containers side by side -->
+    <div class="content">
+      <!-- Left container with site information -->
+      <div class="info-window">
+        <p>Welcome to our site. Please log in or register to continue.</p>
+        <p>Here we provide some information about the site, including features and benefits.</p>
+      </div>
+  
+      <!-- Right container for Login/Register forms -->
+      <div class="form-window">
+        <div class="buttons">
+          <button (click)="showLoginForm()">Login</button>
+          <button (click)="showRegisterForm()">Register</button>
+        </div>
+  
+        <!-- Login Form -->
+        <div *ngIf="showLogin">
+          <h2>Login</h2>
+          <form (ngSubmit)="onLoginSubmit()">
+            <input type="email" [(ngModel)]="loginEmail" name="loginEmail" required placeholder="Email">
+            <input type="password" [(ngModel)]="loginPassword" name="loginPassword" required placeholder="Password">
+            <button type="submit" [disabled]="!loginEmail || !loginPassword">Login</button>
+          </form>
+        </div>
+  
+        <!-- Register Form -->
+        <div *ngIf="showRegister">
+          <h2>Register</h2>
+          <form (ngSubmit)="onRegisterSubmit()">
+            <input type="text" [(ngModel)]="registerUsername" name="registerUsername" required placeholder="Username">
+            <input type="email" [(ngModel)]="registerEmail" name="registerEmail" required placeholder="Email">
+            <input type="password" [(ngModel)]="registerPassword" name="registerPassword" required placeholder="Password">
+            <input type="password" [(ngModel)]="registerConfirmPassword" name="registerConfirmPassword" required placeholder="Confirm Password">
+            <button type="submit" [disabled]="!registerUsername || !registerEmail || !registerPassword || !registerConfirmPassword || registerPassword !== registerConfirmPassword">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
